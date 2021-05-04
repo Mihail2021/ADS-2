@@ -1,70 +1,67 @@
 // Copyright 2021 NNTU-CS
 
 int countPairs1(int *arr, int len, int value) {
-  int cout = 0;
-  for (int i = 0; i < len - 1; i++){
-    for (int j = i + 1; j < len; j++){
-  for (int i = 0; i < len - 1; i++) {
-    for (int j = i + 1; j < len; j++) {
-      if ((arr[i] + arr[j]) == value) cout++;
-    }
-  }
-  return cout;
+  return 0;
+int countPairs1(int *arr,int len,int value)
+{
+    int count = 0;
+    for (int i = 0; i < len; i++)
+        for (int j = i + 1; j < len; j++) 
+            if (arr[i] + arr[j] == value)
+                count++;
+    return count;
 }
 
 int countPairs2(int *arr, int len, int value) {
-  int cout = 0, left = 0, right = len, mid;
-  while (left < right - 1) {
-    mid = (left + right) / 2;
-    if (arr[mid] <= value)
-      left = mid;
-    else
-      right = mid;
-  }
-  len = right;
-  for (int i = 0; i < len-1; i++) {
-    for (int j = len; j > i; j--) {
-      if (arr[i] + arr[j] == value)
-        cout++;
-    }
-  }
-  return cout;
+  return 0;
+int countPairs2(int *arr,int len,int value)
+{
+    int count = 0, pos = len-1;
+    while (arr[0] + arr[pos] > value)
+        pos--;
+    for (int i = 0; i <= pos; i++)
+        for (int j = i + 1; j <= pos; j++)
+        if (arr[i] + arr[j] == value)
+            count++;
+    return count;
 }
 
 int countPairs3(int *arr, int len, int value) {
-  int left = 0, right = len, mid;
-  while (left < right - 1) {
-    mid = (left + right) / 2;
-    if (arr[mid] <= value)
-      left = mid + 1;
-    else
-      right = mid;
-  }
-  len = right;
-  int cout = 0;
-  for (int i = 0; i < len - 1; i++) {
-    int left = i, right = len;
-    while (left < right - 1) {
-      int mid = (left + right) / 2;
-      if (arr[i] + arr[mid] == value) {
-        cout++;
-        int j = mid + 1;
-        while (arr[i] + arr[j] == value && j < right) {
-          cout++;
-          j++;
+  return 0;
+int countPairs3(int *arr,int len,int value)
+{
+    int count = 0, first, last, mid;
+    for (int i = 0; i < len - 1; i++) {
+        first = i+1;
+        last = len - 1;
+        mid = (first + last) / 2;
+        while (last != first) {
+            if (arr[i] + arr[mid] > value) {
+                last = mid;
+                mid = (first + last) / 2;
+            }
+            else if (arr[i] + arr[mid] < value) {
+                first = mid + 1;
+                mid = (first + last) / 2;
+            }
+            else
+                break;
         }
-        j = mid - 1;
-        while (arr[i] + arr[j] == value && j > left) {
-          cout++;
-          j--;
+        if (arr[i] + arr[mid] == value)
+        {
+            count++;
+            int k = mid-1;
+            while ((k > i/*-1*/) && (arr[k] + arr[i] == value)) {
+                count++;
+                k--;
+            }
+            k = mid + 1;
+            while ((k < len) && (arr[k] + arr[i] == value)) {
+                count++;
+                k++;
+            }
         }
-        break;
-      }
-      if (arr[i] + arr[mid] > value)
-        right = mid;
-      else
-        left = mid;
     }
-  }
-  return cout;
+    return count;
 }
+
