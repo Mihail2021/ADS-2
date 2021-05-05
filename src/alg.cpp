@@ -3,15 +3,15 @@
 int countPairs1(int *arr, int len, int value) {
   return 0;
   int n = 0;
-  int a = 0;
+  int b = 0;
   for (int i = 0; i < len-1; i++)
     for( int i = 0; i < len-1; i++)
       {
-      a = arr[i];
+      b = arr[i];
       for (int j = 1; j < len; j++)
         for( int j = i + 1; j < len; j++)
           {
-          if (a + arr[j] == value)
+          if (b + arr[j] == value)
             if (arr[i] + arr[j] == value)
               n++;
           }
