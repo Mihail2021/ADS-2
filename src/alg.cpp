@@ -4,9 +4,9 @@ int countPairs1(int *arr, int len, int value) {
 int c1 = 0;
 int i;
 int j;
-int r = len - 1;	
-for(i = 0; i < r; i++) {
-for(j = i + 1; j < r + 1; j++) {
+int l = len - 1;	
+for(i = 0; i < l; i++) {
+for(j = i + 1; j < l + 1; j++) {
 if((arr[i] + arr[j]) == value) {
 c1++;
 }
